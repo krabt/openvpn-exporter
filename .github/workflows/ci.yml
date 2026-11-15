@@ -75,12 +75,17 @@ jobs:
           version: latest
           args: release --snapshot --clean
 
+      - name: Set beta release timestamp
+        if: github.ref == 'refs/heads/dev'
+        id: beta_time
+        run: echo "timestamp=$(date -u +'%Y%m%d%H%M%S')" >> "$GITHUB_OUTPUT"
+
       - name: Publish beta GitHub release
         if: github.ref == 'refs/heads/dev'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: beta-${{ github.sha }}
-          name: Beta ${{ github.sha }}
+          tag_name: beta-${{ steps.beta_time.outputs.timestamp }}
+          name: Beta ${{ steps.beta_time.outputs.timestamp }}
           target_commitish: ${{ github.sha }}
           prerelease: true
           make_latest: false
