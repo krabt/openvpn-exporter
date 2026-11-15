@@ -94,4 +94,4 @@ Metrics should be available at http://localhost:9176/metrics.
 ## Get a standalone executable binary
 
 You can download the pre-compiled binaries from the
-[releases page](https://github.com/kumina/openvpn_exporter/releases).
+[releases page](https://github.com/krabt/openvpn_exporter/releases).

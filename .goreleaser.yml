@@ -1,21 +1,30 @@
-# This is an example goreleaser.yaml file with some sane defaults.
-# Make sure to check the documentation at http://goreleaser.com
+version: 2
+
 before:
   hooks:
-  - go mod download
+    - go mod download
+
 builds:
-- env:
-  - CGO_ENABLED=0
-  goarch:
-  - amd64
-  goos:
-  - linux
-  - darwin
-dockers:
-- image_templates:
-  - "kumina/openvpn-exporter:latest"
-  - "kumina/openvpn-exporter:{{ .Tag }}"
-  build_flag_templates:
-  - "--label=org.label-schema.schema-version=1.0"
-  - "--label=org.label-schema.version={{ .Version }}"
-  - "--label=org.label-schema.name={{ .ProjectName }}"
+  - id: openvpn-exporter
+    main: .
+    binary: openvpn_exporter
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w
+
+archives:
+  - formats:
+      - tar.gz
+    name_template: "openvpn_exporter_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - README.md
+      - LICENSE
+
+checksum:
+  name_template: checksums.txt
