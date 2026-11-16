@@ -10,7 +10,7 @@ ARG TARGETOS
 ARG TARGETARCH
 RUN CGO_ENABLED=0 GOOS=$TARGETOS GOARCH=$TARGETARCH go build -ldflags="-s -w" -o /out/openvpn_exporter .
 
-FROM gcr.io/distroless/static-debian13:nonroot
+FROM alpine:3
 COPY --from=builder /out/openvpn_exporter /bin/openvpn_exporter
 ENTRYPOINT ["/bin/openvpn_exporter"]
 CMD [ "-h" ]
