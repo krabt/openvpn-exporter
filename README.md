@@ -91,6 +91,18 @@ docker run -p 9176:9176 \
 
 Metrics should be available at http://localhost:9176/metrics.
 
+prometheus config job name should be `openvpn-metrics`
+
+```yaml
+  - job_name: openvpn-metrics
+    static_configs:
+      - targets:
+          - openvpn-exporter:9176
+        labels:
+          instance: ovpn-tc 
+```
+
+
 ## Get a standalone executable binary
 
 You can download the pre-compiled binaries from the
