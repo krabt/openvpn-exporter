@@ -7,7 +7,7 @@ before:
 builds:
   - id: openvpn-exporter
     main: .
-    binary: openvpn_exporter
+    binary: openvpn-exporter
     env:
       - CGO_ENABLED=0
     goos:
