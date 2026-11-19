@@ -1,6 +1,6 @@
 GO_FILES := $(shell find . -name '*.go' -not -path './vendor/*')
-BINARY := openvpn_exporter
-IMAGE_NAME ?= openvpn_exporter
+BINARY := openvpn-exporter
+IMAGE_NAME ?= openvpn-exporter
 IMAGE_TAG ?= latest
 
 .PHONY: all build test fmt check-fmt image clean
